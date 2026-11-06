@@ -39,3 +39,8 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# tests / docs build
+coverage/
+docs/_site/
+scripts/out/
