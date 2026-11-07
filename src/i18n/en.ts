@@ -157,6 +157,7 @@ export const en = {
   remainderNote:
     'Shares are rounded down to 0.01 {unit}. The extra {value} from rounding is added to the last share.',
   divideError_tooFewShares: 'Enter at least 2 shares.',
+  divideError_count: 'Enter a whole number of shares, from 2 to 50.',
   divideError_tooManyShares: 'At most 50 shares.',
   divideError_badRatio: 'Every ratio part must be more than zero.',
   divideError_zeroArea: 'Enter an area to divide.',

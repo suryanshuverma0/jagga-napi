@@ -146,6 +146,7 @@ export const ne: Record<StringKey, string> = {
   shareRatio: 'अनुपात {r}',
   remainderNote: 'भागहरू ०.०१ {unit} सम्म घटाएर मिलाइएको छ। मिलाउँदा बचेको {value} अन्तिम भागमा थपिएको छ।',
   divideError_tooFewShares: 'कम्तीमा २ भाग राख्नुहोस्।',
+  divideError_count: 'भागको संख्या २ देखि ५० सम्मको पूर्ण अङ्कमा राख्नुहोस्।',
   divideError_tooManyShares: 'बढीमा ५० भाग।',
   divideError_badRatio: 'अनुपातको हरेक भाग शून्यभन्दा बढी हुनुपर्छ।',
   divideError_zeroArea: 'बाँड्ने क्षेत्रफल राख्नुहोस्।',
