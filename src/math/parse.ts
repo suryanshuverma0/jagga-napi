@@ -34,11 +34,14 @@ export function parsePositive(text: string): NumberParseResult {
 }
 
 /**
- * Keep only characters that can form a non-negative decimal, for live input sanitising.
- * Devanagari digits are converted to Latin. A second decimal point is dropped.
+ * Live input cleaning: Devanagari digits → Latin, keep digits, one decimal point and minus signs.
+ * Minus signs are kept on purpose so parseNonNegative can report "negative" instead of the
+ * value silently changing sign.
  */
-export function sanitizeDecimalTyping(text: string): string {
-  const latin = toLatinDigits(text).replace(/[^0-9.]/g, '');
+export function cleanNumberTyping(text: string): string {
+  const latin = toLatinDigits(text)
+    .replace(/[−–—]/g, '-')
+    .replace(/[^0-9.-]/g, '');
   const firstDot = latin.indexOf('.');
   if (firstDot === -1) return latin;
   return latin.slice(0, firstDot + 1) + latin.slice(firstDot + 1).replace(/\./g, '');

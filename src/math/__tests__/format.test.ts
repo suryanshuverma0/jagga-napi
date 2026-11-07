@@ -1,6 +1,6 @@
 import { formatNumber, groupNepali } from '../format';
 import { localizeDigits, toDevanagariDigits, toLatinDigits } from '../numerals';
-import { normalizeNumberText, parseNonNegative, parsePositive, sanitizeDecimalTyping } from '../parse';
+import { cleanNumberTyping, normalizeNumberText, parseNonNegative, parsePositive } from '../parse';
 
 describe('groupNepali', () => {
   it.each([
@@ -75,9 +75,12 @@ describe('parsing user input', () => {
   it('normalizeNumberText strips grouping', () => {
     expect(normalizeNumberText('१,२३४')).toBe('1234');
   });
-  it('sanitizeDecimalTyping keeps one decimal point and digits only', () => {
-    expect(sanitizeDecimalTyping('12.3.4')).toBe('12.34');
-    expect(sanitizeDecimalTyping('-५a.५')).toBe('5.5');
-    expect(sanitizeDecimalTyping('')).toBe('');
+  it('cleanNumberTyping keeps digits, one decimal point and minus signs', () => {
+    expect(cleanNumberTyping('12.3.4')).toBe('12.34');
+    expect(cleanNumberTyping('५a.५')).toBe('5.5');
+    expect(cleanNumberTyping('−५')).toBe('-5');
+    expect(cleanNumberTyping('1,00,000')).toBe('100000');
+    expect(cleanNumberTyping('')).toBe('');
+    expect(val(parseNonNegative(cleanNumberTyping('-3')))).toBe('negative');
   });
 });
