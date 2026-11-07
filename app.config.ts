@@ -36,7 +36,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   backgroundColor: '#F7F5EF',
   android: {
     package: 'com.suryanshuverma.jagganapi',
-    versionCode: 1,
+    // versionCode is managed remotely by EAS (eas.json: appVersionSource "remote", autoIncrement).
     adaptiveIcon: {
       foregroundImage: './assets/android-icon-foreground.png',
       backgroundImage: './assets/android-icon-background.png',
@@ -135,6 +135,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     privacyPolicyUrl: 'https://suryanshuverma0.github.io/jagga-napi/privacy',
     supportEmail: 'suryanshuverma.dev@gmail.com',
+    // Set by `eas init` (see docs/release-checklist.md). Replace with the literal ID it prints.
     eas: { projectId: process.env.EAS_PROJECT_ID },
   },
 });

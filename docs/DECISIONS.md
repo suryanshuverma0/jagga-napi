@@ -45,6 +45,19 @@ One line per judgement call, with the reason.
 - The Add/Subtract screen has no banner — the brief lists banners only on Converter, Plot, Price, Divide and History.
 - Nepali "Save" button label is "सुरक्षित" (one word) so it fits on one line on 360 dp phones.
 
+## Release
+
+- Icon: an irregular surveyed-plot outline with "रो" inside and a saffron tape-measure dimension line under it, on brand green. No flag, emblem or map. Text is rendered with the bundled Mukta font in headless Chrome (`scripts/brand/render.js`) so Devanagari is shaped correctly; SVG sources are kept in `store/source/`.
+- Adaptive icon art sits inside the central 60% (Android's safe zone is 66%), and the monochrome layer is a single-colour silhouette for Android 13+ themed icons.
+- EAS `appVersionSource: "remote"` + `autoIncrement` on production: versionCode can never be reused by accident; `version` (user-facing) stays in app.config.ts.
+- `eas submit` targets the **internal** track as a **draft**, so nothing reaches users without a manual promote.
+- Release profiles build ARM ABIs only (armeabi-v7a, arm64-v8a) with R8 minify and resource shrinking, to stay under the 25 MB AAB budget; development keeps all ABIs for emulators. x86 Chromebooks generally run ARM apps through translation.
+- Privacy page permalink is `/privacy/` (GitHub Pages redirects `/privacy` to it, so the URL in the brief works). Internal docs are excluded from the public site by `docs/_config.yml`.
+- Privacy policy refers to "the developer of Jagga Napi" plus the website and email, rather than a personal name, which the brief does not give.
+- Data safety: declares Approximate location (from IP), App interactions, Crash logs, Diagnostics and Device or other IDs as collected **and shared**, required, for advertising/analytics/fraud prevention. This is the conservative reading of Google's SDK disclosure page; reasons are in data-safety.md.
+- Store listing uses "land calculator for Nepal" (natural English) rather than the exact phrase "land calculator nepal"; Play's search matches the words, and keyword-stuffed phrasing risks a metadata-policy rejection.
+- Release notes, the IARC questionnaire answers and the "Government apps: No" declaration are written into the checklist because they need the Play Console login.
+
 ## Ads
 
 - `BannerAdSize.LARGE_ANCHORED_ADAPTIVE_BANNER`: v17 deprecates `ANCHORED_ADAPTIVE_BANNER` in favour of this; it is still the anchored adaptive format the brief asks for.

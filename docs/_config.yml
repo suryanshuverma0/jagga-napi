@@ -1,0 +1,13 @@
+# GitHub Pages (Jekyll) for https://suryanshuverma0.github.io/jagga-napi/
+title: Jagga Napi
+description: Ropani, Bigha and plot area calculator for Nepal — fully offline.
+theme: jekyll-theme-minimal
+# Internal project docs are kept out of the public site.
+exclude:
+  - PLAN.md
+  - DECISIONS.md
+  - data-safety.md
+  - store-listing.md
+  - screenshots.md
+  - release-checklist.md
+  - app-ads.txt

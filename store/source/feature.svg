@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500"><defs>
+       <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+         <stop offset="0" stop-color="#1B6B4A"/><stop offset="1" stop-color="#124D35"/>
+       </linearGradient>
+       <clipPath id="tile"><rect x="64" y="90" width="320" height="320" rx="72"/></clipPath>
+     </defs>
+     <rect width="1024" height="500" fill="url(#fg)"/>
+     <g opacity="0.10" stroke="#FFFFFF" stroke-width="6" fill="none">
+       <polygon points="640,-40 1080,10 1060,330 700,300"/>
+       <polygon points="700,300 1060,330 1040,560 680,540"/>
+     </g>
+     <g clip-path="url(#tile)">
+       <rect x="64" y="90" width="320" height="320" fill="#124D35"/>
+       <g transform="translate(64 90) scale(0.3125)"><g transform="translate(512 512) scale(0.86) translate(-512 -540)">
+  <polygon points="262,268 742,224 800,700 226,736" fill="rgba(255,255,255,0.14)" stroke="#FFFFFF" stroke-width="44"
+           stroke-linejoin="round"/>
+  <text x="512" y="560" text-anchor="middle" font-family="Mukta" font-weight="700" font-size="300"
+        fill="#FFFFFF">रो</text>
+  <g stroke="#F0B45A" stroke-width="30" stroke-linecap="round">
+           <line x1="226" y1="842" x2="800" y2="842"/>
+           <line x1="226" y1="806" x2="226" y2="878"/>
+           <line x1="800" y1="806" x2="800" y2="878"/>
+           <line x1="370" y1="826" x2="370" y2="858"/>
+           <line x1="513" y1="826" x2="513" y2="858"/>
+           <line x1="656" y1="826" x2="656" y2="858"/>
+         </g></g></g>
+     </g>
+     <text x="440" y="210" font-family="Mukta" font-weight="700" font-size="92" fill="#FFFFFF">जग्गा नापी</text>
+     <text x="444" y="268" font-family="Mukta" font-weight="600" font-size="40" fill="#F0B45A">Ropani Calculator</text>
+     <text x="444" y="334" font-family="Mukta" font-weight="500" font-size="30" fill="#FFFFFF">रोपनी · आना · बिघा · कट्ठा · धुर</text>
+     <text x="444" y="378" font-family="Mukta" font-weight="400" font-size="26" fill="#FFFFFF" opacity="0.9">Plot area · Land price · Divide land · Offline</text></svg>
