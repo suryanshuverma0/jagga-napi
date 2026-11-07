@@ -14,7 +14,8 @@
     "test:watch": "jest --watch",
     "check": "npm run lint && npm run typecheck && npm test -- --ci",
     "licenses": "expo export --platform android --source-maps --output-dir scripts/out && node scripts/generate-licenses.js",
-    "app-ads": "node scripts/app-ads.js"
+    "app-ads": "node scripts/app-ads.js",
+    "demo": "expo export --platform web --output-dir dist && node scripts/make-web-demo.js dist docs/demo"
   },
   "dependencies": {
     "decimal.js-light": "^2.5.1",

@@ -8,6 +8,7 @@ An offline Android app for land measurement in Nepal: convert ropani, aana, pais
 and dhur to square feet and square metres, measure plot area from tape measurements, work out land
 price, and divide land among heirs.
 
+- [Try the web preview](./demo/) (the real app running in your browser)
 - [Privacy policy](./privacy/)
 - Contact: [suryanshuverma.dev@gmail.com](mailto:suryanshuverma.dev@gmail.com)
 

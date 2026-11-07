@@ -7,3 +7,4 @@ coverage
 docs/_site
 assets
 package-lock.json
+docs/demo
