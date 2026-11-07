@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { evaluateArith } from '@/calc/evaluate';
 import { AreaInput } from '@/components/AreaInput';
 import { AreaResults } from '@/components/AreaResults';
+import { CalcActions } from '@/components/CalcActions';
 import { Screen } from '@/components/Screen';
 import { Button, Card, ErrorNote, IconButton, Segmented, SectionTitle } from '@/components/ui';
 import { useBackGuard } from '@/hooks/useBackGuard';
@@ -25,18 +26,19 @@ export default function ArithmeticScreen() {
     area: emptyAreaEntry(system),
   });
   const [p, setP] = useState<ArithPayload>(() => ({ parcels: [newParcel(1), newParcel(1)] }));
-  useHistoryRestore('arith', setP);
-  useBackGuard(
-    p.parcels.some((x) => !isAreaEntryBlank(x.area)),
-    'stack',
-  );
+  const [saved, setSaved] = useState<ArithPayload | null>(null);
+  useHistoryRestore('arith', (x) => {
+    setP(x);
+    setSaved(x);
+  });
+  useBackGuard(p.parcels.some((x) => !isAreaEntryBlank(x.area)) && saved !== p, 'stack');
 
   const total = useMemo(() => evaluateArith(p), [p]);
   const update = (i: number, parcel: ArithParcel) =>
     setP((x) => ({ parcels: x.parcels.map((q, j) => (j === i ? parcel : q)) }));
 
   return (
-    <Screen banner>
+    <Screen banner footer={<CalcActions kind="arith" payload={p} onSaved={() => setSaved(p)} />}>
       {p.parcels.map((parcel, i) => {
         const n = tr.n(String(i + 1));
         return (

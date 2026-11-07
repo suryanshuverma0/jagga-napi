@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { evaluatePrice } from '@/calc/tools';
 import { AreaInput } from '@/components/AreaInput';
 import { AreaResults } from '@/components/AreaResults';
+import { CalcActions } from '@/components/CalcActions';
 import { MoneyResult } from '@/components/MoneyResult';
 import { NumberField } from '@/components/NumberField';
 import { Screen } from '@/components/Screen';
@@ -27,14 +28,18 @@ export default function PriceScreen() {
     rateUnit: settings.defaultSystem === 'bigha' ? 'dhur' : 'aana',
     total: '',
   }));
-  useHistoryRestore('price', setP);
-  useBackGuard(!isAreaEntryBlank(p.area) || p.rate !== '' || p.total !== '', 'stack');
+  const [saved, setSaved] = useState<PricePayload | null>(null);
+  useHistoryRestore('price', (x) => {
+    setP(x);
+    setSaved(x);
+  });
+  useBackGuard((!isAreaEntryBlank(p.area) || p.rate !== '' || p.total !== '') && saved !== p, 'stack');
 
   const ev = useMemo(() => evaluatePrice(p), [p]);
   const unitName = t(`unit_${p.rateUnit}` as StringKey);
 
   return (
-    <Screen banner>
+    <Screen banner footer={<CalcActions kind="price" payload={p} onSaved={() => setSaved(p)} />}>
       <Segmented
         label={t('priceTitle')}
         value={p.mode}

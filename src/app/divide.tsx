@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { evaluateDivide } from '@/calc/tools';
 import { AreaInput } from '@/components/AreaInput';
 import { ResultRow } from '@/components/AreaResults';
+import { CalcActions } from '@/components/CalcActions';
 import { NumberField } from '@/components/NumberField';
 import { Screen } from '@/components/Screen';
 import { AppText, Card, ErrorNote, InfoNote, Segmented, SectionTitle } from '@/components/ui';
@@ -29,14 +30,18 @@ export default function DivideScreen() {
     ratios: '',
     system: settings.defaultSystem,
   }));
-  useHistoryRestore('divide', setP);
-  useBackGuard(!isAreaEntryBlank(p.area) || p.count !== '' || p.ratios !== '', 'stack');
+  const [saved, setSaved] = useState<DividePayload | null>(null);
+  useHistoryRestore('divide', (x) => {
+    setP(x);
+    setSaved(x);
+  });
+  useBackGuard((!isAreaEntryBlank(p.area) || p.count !== '' || p.ratios !== '') && saved !== p, 'stack');
 
   const ev = useMemo(() => evaluateDivide(p), [p]);
   const unitName = t(`unit_${smallestUnit(p.system)}` as StringKey);
 
   return (
-    <Screen banner>
+    <Screen banner footer={<CalcActions kind="divide" payload={p} onSaved={() => setSaved(p)} />}>
       <Card>
         <AreaInput entry={p.area} onChange={(area) => setP((x) => ({ ...x, area }))} label={t('area')} />
       </Card>

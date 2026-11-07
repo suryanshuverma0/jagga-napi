@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AreaResults } from '@/components/AreaResults';
+import { CalcActions } from '@/components/CalcActions';
 import { NumberField } from '@/components/NumberField';
 import { PlotPreview } from '@/components/PlotPreview';
 import { Screen } from '@/components/Screen';
@@ -59,12 +60,16 @@ export default function PlotScreen() {
   const [plot, setPlot] = useState<PlotPayload>(() =>
     emptyPlot(meta.lastLengthUnit ?? settings.defaultLengthUnit),
   );
-  useHistoryRestore('plot', setPlot);
+  const [saved, setSaved] = useState<PlotPayload | null>(null);
+  useHistoryRestore('plot', (p) => {
+    setPlot(p);
+    setSaved(p);
+  });
 
   const evaluation = useMemo(() => evaluatePlot(plot), [plot]);
   const dirty =
     plot.sides.some((s) => s.trim() !== '') || plot.triangles.some((tri) => tri.some((s) => s.trim() !== ''));
-  useBackGuard(dirty, 'tab');
+  useBackGuard(dirty && saved !== plot, 'tab');
 
   const unitShort = t(plot.lengthUnit === 'ft' ? 'lengthShort_ft' : 'lengthShort_m');
 
@@ -92,7 +97,7 @@ export default function PlotScreen() {
     `${compoundLine(sqft, settings.defaultSystem, tr).value} · ${tr.n(formatNumber(sqft, { maxDp: 2 }))} ${t('unit_sqft')}`;
 
   return (
-    <Screen banner>
+    <Screen banner footer={<CalcActions kind="plot" payload={plot} onSaved={() => setSaved(plot)} />}>
       <Card>
         <Segmented
           label={t('plotTitle')}
