@@ -27,6 +27,10 @@ export const SIDES_NEEDED: Record<Exclude<PlotShape, 'triangles'>, number> = {
   quadrilateral: 5,
 };
 
+export function emptyPlot(lengthUnit: PlotPayload['lengthUnit']): PlotPayload {
+  return { shape: 'rectangle', lengthUnit, sides: ['', '', '', '', ''], triangles: [['', '', '']] };
+}
+
 type SidesResult =
   { kind: 'values'; values: Decimal[] } | { kind: 'incomplete' } | { kind: 'invalid'; index: number };
 

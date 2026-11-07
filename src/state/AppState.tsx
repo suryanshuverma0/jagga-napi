@@ -56,7 +56,10 @@ export function AppStateProvider({ children, store }: { children: React.ReactNod
 
   const systemScheme = useColorScheme();
   useEffect(() => {
-    Appearance.setColorScheme(settings.theme === 'system' ? 'unspecified' : settings.theme);
+    // Keeps native dialogs (Alert, keyboard) in step with a manual theme. Not available on web.
+    if (typeof Appearance.setColorScheme === 'function') {
+      Appearance.setColorScheme(settings.theme === 'system' ? 'unspecified' : settings.theme);
+    }
   }, [settings.theme]);
   const scheme = settings.theme === 'system' ? (systemScheme === 'dark' ? 'dark' : 'light') : settings.theme;
   const palette = scheme === 'dark' ? dark : light;
