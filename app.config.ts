@@ -59,7 +59,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supportsTablet: false,
   },
   plugins: [
-    'expo-router',
+    // Web is only used for previews; one bundle makes the preview host-path independent.
+    ['expo-router', { asyncRoutes: { web: false } }],
     'expo-system-ui',
     'expo-localization',
     [
