@@ -26,3 +26,25 @@ One line per judgement call, with the reason.
 - Plot lengths are decimal feet or metres only, with no feet + inches entry — the brief scopes it to "feet or metres"; noted as a v1.1 candidate.
 - Amounts in words use numerals plus scale words ("1 करोड 23 लाख 45 हजार 678"), not fully spelt-out Nepali numbers — this is how prices are written in Nepali listings and on notices, and spelling out 1–99 in Nepali is irregular and error-prone.
 - The price "in words" line rounds to whole rupees; the figure line keeps paisa (2 dp).
+- Brief's sanity value "1 ropani ≈ 508.72 m²" contradicts its own exact definitions (5,476 × 0.09290304 = 508.737 m² → 508.74). The app keeps the exact value; the test documents the discrepancy. 508.72 comes from using the rounded factor 0.0929.
+- Switching input system carries the current value across (2 dp on the last compound part, 4 dp otherwise) instead of clearing the field — fewer retypes on a small phone.
+- Compound input accepts "-", "/" or spaces as separators, and missing trailing parts count as 0 ("2-5" = 2 ropani 5 aana).
+- Plot fields stay as text until each one parses, and "0" is reported as "must be more than zero" for the named field rather than as a generic triangle error.
+- Division works in hundredths of daam/dhur (the display precision), rounds every share down except the last, and states the extra on the last share — sums always equal the displayed total.
+- Share card is always light (white card, green band) regardless of app theme, so shared images look the same to every recipient; width fits the screen up to 400 dp.
+- Dates on share cards/history use YYYY-MM-DD (AD) with localised digits. A Bikram Sambat date would be nicer but needs a BS calendar table, which I would have to source and verify — out of scope for v1.
+- The "copy as text" output keeps the app-name line (the rewarded ad removes the watermark from images only, as the brief specifies).
+- Back guard: tab screens confirm only when back would exit the app (other tabs keep state); stack screens use `usePreventRemove`. Saving a calculation clears the guard until the next edit.
+
+## Ads
+
+- `BannerAdSize.LARGE_ANCHORED_ADAPTIVE_BANNER`: v17 deprecates `ANCHORED_ADAPTIVE_BANNER` in favour of this; it is still the anchored adaptive format the brief asks for.
+- Consent (`AdsConsent.gatherConsent`) and SDK init run only after onboarding, so the very first screen is ad-free, as required.
+- Request config: `maxAdContentRating: T`, `tagForChildDirectedTreatment: false`, `tagForUnderAgeOfConsent: false` (brief: not child-directed, 18+ audience).
+- Interstitial only via `afterEngagement()` (save/share), skipped when the keyboard is visible, in session 1, or within 3 minutes of the last one; preloaded again after each show. No fill = silently nothing.
+- When the review prompt fires (3rd save/share, ≤ once per 30 days) the interstitial is skipped for that engagement, so the user never gets two interruptions at once.
+- Release guard lives in `config/ad-ids.js`: it throws on the EAS build worker (`EAS_BUILD=true`) for profile `production` if any ID is empty or from Google's sample publisher `ca-app-pub-3940256099942544`. Locally (where EAS "secret" variables are unreadable) it warns instead; `JAGGA_STRICT_AD_GUARD=1` makes it strict locally too.
+- Development builds (`__DEV__`) always use Google test units even if real IDs are configured, so real ads are never requested while developing.
+- `delayAppMeasurementInit`, `optimizeInitialization`, `optimizeAdLoading` enabled in the AdMob plugin — faster cold start on low-end phones.
+- iOS is not shipped in v1; the plugin's `iosAppId` uses Google's sample iOS App ID only to satisfy the plugin.
+- Web/test builds use `.web.tsx` stubs so React Native Web previews never load the ads SDK.

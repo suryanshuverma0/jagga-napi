@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 
 import { evaluatePayloadArea } from '@/calc/evaluate';
 import { useEngagement } from '@/engagement/useEngagement';
@@ -43,7 +43,9 @@ export function CalcActions<K extends CalcKind>({
     setName(n);
     notify(tr.t('saved'));
     onSaved?.();
-    void engage();
+    // Let the keyboard from the name field finish closing first: ads never show over it.
+    Keyboard.dismiss();
+    setTimeout(() => void engage(), 700);
   };
 
   return (
