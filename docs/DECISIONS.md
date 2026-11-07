@@ -36,6 +36,15 @@ One line per judgement call, with the reason.
 - The "copy as text" output keeps the app-name line (the rewarded ad removes the watermark from images only, as the brief specifies).
 - Back guard: tab screens confirm only when back would exit the app (other tabs keep state); stack screens use `usePreventRemove`. Saving a calculation clears the guard until the next edit.
 
+## Accessibility and quality
+
+- Every tappable element is ≥ 48 dp (buttons, segments, icon buttons, list rows ≥ 56 dp, number fields 56 dp); heights are `minHeight` so text scaling grows them instead of clipping.
+- Errors always carry an icon and an "Error:" / "त्रुटि:" prefix and use `accessibilityRole="alert"` with a polite live region; invalid fields also get a thicker border and an icon, never colour alone.
+- Copy actions announce "Copied" to screen readers as well as showing a toast.
+- The licences screen lists exactly the 58 packages Metro bundles (derived from the bundle source map via `npm run licenses`), plus the Mukta font (OFL) and Material Icons (Apache-2.0).
+- The Add/Subtract screen has no banner — the brief lists banners only on Converter, Plot, Price, Divide and History.
+- Nepali "Save" button label is "सुरक्षित" (one word) so it fits on one line on 360 dp phones.
+
 ## Ads
 
 - `BannerAdSize.LARGE_ANCHORED_ADAPTIVE_BANNER`: v17 deprecates `ANCHORED_ADAPTIVE_BANNER` in favour of this; it is still the anchored adaptive format the brief asks for.

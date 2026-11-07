@@ -45,7 +45,7 @@ export const ne: Record<StringKey, string> = {
   copied: 'कपी भयो',
   copyValue: '{label} कपी गर्नुहोस्',
   share: 'सेयर',
-  save: 'सुरक्षित गर्नुहोस्',
+  save: 'सुरक्षित',
   cancel: 'रद्द',
   delete: 'हटाउनुहोस्',
   rename: 'नाम फेर्नुहोस्',
@@ -61,7 +61,7 @@ export const ne: Record<StringKey, string> = {
 
   inputSystem: 'क्षेत्रफल राख्नुहोस्',
   quickEntry: 'छिटो लेख्ने',
-  separateFields: 'छुट्टाछुट्टै',
+  separateFields: 'छुट्टाछुट्टै कोठामा लेख्ने',
   quickEntryHint_ropani: 'जस्तै २-५-३-१ (रोपनी-आना-पैसा-दाम)',
   quickEntryHint_bigha: 'जस्तै ०-३-७.२५ (बिघा-कट्ठा-धुर)',
   valuePlaceholder: '०',

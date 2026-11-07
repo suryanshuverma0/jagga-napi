@@ -65,7 +65,7 @@ export const en = {
   // Input
   inputSystem: 'Enter area in',
   quickEntry: 'Quick entry',
-  separateFields: 'Separate fields',
+  separateFields: 'One box per unit',
   quickEntryHint_ropani: 'e.g. 2-5-3-1 (ropani-aana-paisa-daam)',
   quickEntryHint_bigha: 'e.g. 0-3-7.25 (bigha-kattha-dhur)',
   valuePlaceholder: '0',

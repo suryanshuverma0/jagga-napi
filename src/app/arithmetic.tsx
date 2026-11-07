@@ -38,7 +38,7 @@ export default function ArithmeticScreen() {
     setP((x) => ({ parcels: x.parcels.map((q, j) => (j === i ? parcel : q)) }));
 
   return (
-    <Screen banner footer={<CalcActions kind="arith" payload={p} onSaved={() => setSaved(p)} />}>
+    <Screen footer={<CalcActions kind="arith" payload={p} onSaved={() => setSaved(p)} />}>
       {p.parcels.map((parcel, i) => {
         const n = tr.n(String(i + 1));
         return (

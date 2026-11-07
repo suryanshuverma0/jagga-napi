@@ -17,6 +17,9 @@ module.exports = defineConfig([
   },
   {
     files: ['scripts/**/*.js', 'config/**/*.js', '**/__tests__/**'],
+    languageOptions: {
+      globals: { __dirname: 'readonly', require: 'readonly', module: 'writable', process: 'readonly' },
+    },
     rules: { 'no-console': 'off' },
   },
   {
